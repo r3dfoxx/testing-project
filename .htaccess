@@ -1,0 +1,13 @@
+RewriteEngine  on
+#RewriteRule    "^/index\.php$"  "/main.php" [R]
+#RewriteRule    "^/foo\.html$"  "bar.html"  [R]
+#Redirect 301 /index.php /test.png
+#Deny from all
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php?path=$1 [NC,L,QSA]
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on
+php_flag  log_errors on
+php_value error_log  /var/www/test.loc/PHP_errors.log
