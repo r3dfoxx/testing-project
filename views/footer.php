@@ -1,9 +1,9 @@
 <footer class="text-muted">
     <div class="container">
         <p class="float-right">
-            <a href="#">Back to top</a>
+            <a href="#">Вернуться на вверх</a>
         </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p>Свяжитесь с нами</p>
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -55,3 +55,11 @@ footer {
 footer p {
   margin-bottom: .25rem;
 }
+
+.product-img {
+  background-color: grey;
+  height: 200px !important;
+}
+.left-side-bar {
+  float: left;
+}
