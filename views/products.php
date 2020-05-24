@@ -1,14 +1,14 @@
 <?php require_once(ROOT_PATH . "/views/header.php"); ?>
     <main role="main">
 
-
-
         <section class="jumbotron text-center">
             <div class="container">
-                <h1>Учебный магазин </h1>
-                <p class="lead text-muted">Здесть должен быть какой то текст или карусель с продуктами</p>
+                <h1>Test Shop</h1>
+                <p class="lead text-muted">Something short and leading about the collection below—its contents, the
+                    creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it
+                    entirely.</p>
                 <p>
-                    <a href="/cart.php"class="btn btn-secondary my-2">В корзину</a>
+                    <a href="/cart.php" class="btn btn-secondary my-2">Go to Cart</a>
                 </p>
             </div>
         </section>

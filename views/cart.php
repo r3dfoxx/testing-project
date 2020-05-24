@@ -3,10 +3,12 @@
 
         <section class="jumbotron text-center">
             <div class="container">
-                <h1>Учебный магазин </h1>
-                <p class="lead text-muted">Ваш Заказ </p>
+                <h1>Test Shop</h1>
+                <p class="lead text-muted">Something short and leading about the collection below—its contents, the
+                    creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it
+                    entirely.</p>
                 <p>
-                    <a href="/index.php" class="btn btn-secondary my-2">Продолжить покупки</a>
+                    <a href="/index.php" class="btn btn-secondary my-2">Go to Products</a>
                 </p>
             </div>
         </section>
@@ -18,21 +20,21 @@
                     <?php foreach ($products as $product): ?>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <?php if (!empty($product['image'])): ?>
-                                    <img class="product-img" src="<?php echo $product['image'];?>">
+                                <?php if (!empty($product->image)): ?>
+                                    <img class="product-img" src="<?php echo $product->image;?>">
                                 <?php else:?>
                                     <img class="product-img" src="<?php echo PRODUCT_DEFAULT_IMAGE;?>">
                                 <?php endif;?>
                                 <div class="card-body">
-                                    <p class="card-text"><?php echo $product['name'];?></p>
+                                    <p class="card-text"><?php echo $product->name;?></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="form-group chechbox-block">
                                             <label class="" for="exampleCheck1">Quantity</label>
                                             <input class="form-control" type="number"
-                                                   value="<?php echo $product['selected_quantity']; ?>" id="quantity"
-                                                   name="quantity_<?php echo $product['id'];?>" min="0" max="<?php echo $product['quantity']; ?>">
+                                                   value="<?php echo $product->selectedQuantity; ?>" id="quantity"
+                                                   name="quantity_<?php echo $product->getId();?>" min="0" max="<?php echo $product->quantity; ?>">
                                         </div>
-                                        <small class="text-muted">UAH <?php echo money_format('%i', $product['price']);?></small>
+                                        <small class="text-muted">UAH <?php echo money_format('%i', $product->price);?></small>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +59,7 @@
                     <div class="col-md-6">
                     </div>
                     <div class="col-md-2">
-                        <h2>Всего к оплате:</h2>
+                        <h2>Total Price:</h2>
                     </div>
                     <div class="col-md-4">
                         <h2>$<?php echo money_format('%i', $totalPrice);?></h2>

@@ -1,22 +1,33 @@
 <?php
     require_once dirname(__FILE__). "/config.php";
     require_once dirname(__FILE__). "/functions.php";
+
+    use Models\Cart;
+
     if (empty($_SESSION['products'])) {
         header("Location: index.php");
     }
 
+    $userId = $_SESSION['user_id'] ?? 0;
+    $cart = new Cart($_SESSION['cart_id'], $userId);
     if (!empty($_POST)) {
         if (!empty($_POST['reset'])) {
             unset($_SESSION['products']);
-            deleteAllCartProducts($pdo, $_SESSION['cart_id']);
+            $cart->delete();
             unset($_SESSION['cart_id']);
+            unset($cart);
             header("Location: index.php");
             die();
         }
         unset($_POST['update']);
         foreach ($_POST as $k => $val){
             $id = explode("_", $k)[1];
-            updateCartProductQuantity($pdo, $_SESSION['cart_id'], $id, $val);
+            foreach($cart->cartProducts as $product){
+                if($product->getId() == $id){
+                    $product->selectedQuantity = $val;
+                    $product->save();
+                }
+            }
             foreach($_SESSION['products'] as $key => &$product){
                 if(!empty($product) && $product['id'] == $id){
                     if($val == 0){
@@ -27,8 +38,9 @@
                 }
             } unset($product);
         }
+        $cart->getCartProducts();
     }
-    $products = getCartProducts($pdo, $_SESSION['cart_id']);
-    $totalPrice = getTotalPrice($products);
+    $products = $cart->cartProducts;
+    $totalPrice = $cart->getTotalPrice();
     require_once dirname(__FILE__) . "/views/cart.php";
 ?>

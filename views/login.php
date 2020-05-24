@@ -4,7 +4,7 @@
         <section class="jumbotron text-center">
             <div class="container">
                 <h1>Test Shop</h1>
-                <p class="lead text-muted">Введите Ваш Логин и пароль</p>
+                <p class="lead text-muted">Please fill form below for create account</p>
                 <p>
                     <!--<a href="/cart.php" class="btn btn-secondary my-2">Go to Cart</a>-->
                 </p>

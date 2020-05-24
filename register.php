@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__). "/config.php";
 require_once dirname(__FILE__). "/functions.php";
+require_once dirname(__FILE__). "/models/User.php";
 
 $error = [];
 $fieldsMap = [
@@ -30,7 +31,9 @@ if (!empty($_POST)) {
     unset($v);
 
     if (empty($error)) {
-        $userId = registerUser($pdo, $_POST['user_name'], $_POST['email'], $_POST['password']);
+        $user = new User(null, $_POST['user_name'], $_POST['email'], $_POST['password']);
+        $userId = $user->save($pdo);
+        //$userId = registerUser($pdo, $_POST['user_name'], $_POST['email'], $_POST['password']);
         if(!empty($userId)){
             $_SESSION['user_id'] = $userId;
             header("Location: /index.php");
