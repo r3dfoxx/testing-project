@@ -1,7 +1,7 @@
 <?php
-namespace Models\Traits;
+namespace Shop\Models\Traits;
 
-use Models\Database;
+use Shop\Models\Database;
 
 trait FindRecord
 {

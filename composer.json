@@ -1,5 +1,14 @@
 {
     "require": {
         "vlucas/phpdotenv": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shop\\Models\\": "Models/",
+            "Shop\\Router\\": "Router/",
+            "Shop\\Controllers\\": "Controllers/",
+            "Shop\\View\\": "View/",
+            "Shop\\Helper\\": "Helper/"
+        }
     }
 }

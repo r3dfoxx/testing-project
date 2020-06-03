@@ -1,8 +1,8 @@
 <?php
 
-namespace Models;
+namespace Shop\Models;
 
-use Models\Interfaces\SaveData;
+use Shop\Models\Interfaces\SaveData;
 
 class Product implements SaveData
 {
@@ -91,6 +91,30 @@ class Product implements SaveData
     public static function findAll()
     {
         $items = self::findAllRecord(self::$dbTable);
+        $products = [];
+        foreach ($items as $item) {
+            $product = new Product(
+                $item['id'],
+                $item['name'],
+                $item['price'],
+                $item['quantity'],
+                $item['category_id'],
+                $item['image']
+            );
+            $products[] = $product;
+        }
+        return $products;
+    }
+
+    public static function getProductsByCategories($categories)
+    {
+        $in = str_repeat('?,', count($categories) - 1) . '?';
+        $stmt = Database::getInstance()->prepare("
+            SELECT * 
+            FROM `products` 
+            WHERE category_id IN (" . $in . ")");
+        $stmt->execute($categories);
+        $items = $stmt->fetchAll();
         $products = [];
         foreach ($items as $item) {
             $product = new Product(

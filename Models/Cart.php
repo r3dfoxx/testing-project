@@ -1,15 +1,18 @@
 <?php
 
-namespace Models;
+namespace Shop\Models;
 
-use Models\Interfaces\SaveData;
+use Shop\Models\Interfaces\SaveData;
 
-class Cart implements SaveData
+class Cart implements SaveData, \Iterator
 {
     protected $id;
     public $userId;
     public $totalPrice;
     public $cartProducts = [];
+    private static $cartProductIds = [];
+    private $count = 0;
+    private $index = 0;
 
     public function __construct($id = null, $userId = null)
     {
@@ -18,6 +21,31 @@ class Cart implements SaveData
         if( !empty($this->id) ){
             $this->getCartProducts();
         }
+    }
+
+    public function current()
+    {
+        return $this->cartProducts[$this->index];
+    }
+
+    public function next()
+    {
+        $this->index++;
+    }
+
+    public function rewind()
+    {
+        $this->index = 0;
+    }
+
+    public function key()
+    {
+        return $this->index;
+    }
+
+    public function valid()
+    {
+        return isset($this->cartProducts[$this->key()]);
     }
 
     public function getCartProducts()
@@ -49,8 +77,19 @@ class Cart implements SaveData
             );
             $product->setId($item['id']);
             $this->cartProducts[] = $product;
+            if (!in_array($product->getId(), self::$cartProductIds)) {
+                self::$cartProductIds[] = $product->getId();
+            }
         }
         return $this->cartProducts;
+    }
+
+    public static function getCartProductIds(int $cartId, int $userId) : array
+    {
+        if(empty(self::$cartProductIds)){
+            $cart = new Cart($cartId, $userId);
+        }
+        return self::$cartProductIds;
     }
 
     public function save()
@@ -71,6 +110,16 @@ class Cart implements SaveData
            "total_price" => 0
         ]);
         return Database::getInstance()->lastInsertId();
+    }
+
+    public function updateProductQuantity(int $productId, int $quantity)
+    {
+        foreach($this->cartProducts as $product){
+            if($product->getId() == $productId){
+                $product->selectedQuantity = $quantity;
+                $product->save();
+            }
+        }
     }
 
     public function getTotalPrice()

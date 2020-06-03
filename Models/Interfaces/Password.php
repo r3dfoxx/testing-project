@@ -1,6 +1,6 @@
 <?php
 
-namespace Models\Interfaces;
+namespace Shop\Models\Interfaces;
 
 interface Password
 {

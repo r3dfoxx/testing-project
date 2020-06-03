@@ -1,4 +1,3 @@
-<?php require_once(ROOT_PATH . "/views/header.php"); ?>
     <main role="main">
 
         <section class="jumbotron text-center">
@@ -8,22 +7,22 @@
                     creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it
                     entirely.</p>
                 <p>
-                    <a href="/index.php" class="btn btn-secondary my-2">Go to Products</a>
+                    <a href="/" class="btn btn-secondary my-2">Go to Products</a>
                 </p>
             </div>
         </section>
 
         <div class="album py-5 bg-light">
             <div class="container">
-                <form method="POST" action="/cart.php">
+                <form method="POST" action="/cart/update">
                 <div class="row">
-                    <?php foreach ($products as $product): ?>
+                    <?php foreach ($cart as $product): ?>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
                                 <?php if (!empty($product->image)): ?>
                                     <img class="product-img" src="<?php echo $product->image;?>">
                                 <?php else:?>
-                                    <img class="product-img" src="<?php echo PRODUCT_DEFAULT_IMAGE;?>">
+                                    <img class="product-img" src="<?php echo getenv('PRODUCT_DEFAULT_IMAGE');?>">
                                 <?php endif;?>
                                 <div class="card-body">
                                     <p class="card-text"><?php echo $product->name;?></p>
@@ -46,7 +45,7 @@
                         </div>
                         <div class="col-md-8 center-block">
                             <input type="submit" name="update" class="btn btn-primary order-button" value="UPDATE"/>
-                            <input type="submit" name="reset" class="btn btn-primary order-button" value="RESET"/>
+                            <a name="reset" class="btn btn-primary order-button" href="/cart/reset">RESET</a>
                         </div>
                         <div class="col-md-2 center-block">
                         </div>
@@ -69,4 +68,3 @@
         </div>
 
     </main>
-<?php require_once(ROOT_PATH . "/views/footer.php"); ?>

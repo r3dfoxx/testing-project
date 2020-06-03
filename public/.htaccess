@@ -1,8 +1,4 @@
 RewriteEngine  on
-#RewriteRule    "^/index\.php$"  "/main.php" [R]
-#RewriteRule    "^/foo\.html$"  "bar.html"  [R]
-#Redirect 301 /index.php /test.png
-#Deny from all
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /index.php?path=$1 [NC,L,QSA]

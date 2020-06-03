@@ -13,3 +13,6 @@ CREATE TABLE `cart` (
 
 ALTER table `cart_products` CHANGE COLUMN `user_id` `cart_id` int(10) unsigned NOT NULL;
 ALTER TABLE cart_products ADD COLUMN `is_deleted` tinyint(1) DEFAULT '0';
+
+ALTER TABLE `users` ADD COLUMN `incorrect_login_attempts` int(11) DEFAULT 0;
+ALTER TABLE `users` ADD COLUMN `locked_time` TIMESTAMP;
